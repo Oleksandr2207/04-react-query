@@ -4,8 +4,8 @@ import ReactPaginate from "react-paginate";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 
-import { fetchMovies } from "../../services/movieService.ts";
-import type { Movie, MoviesResponse } from "../../types/movie.ts";
+import { fetchMovies, type MoviesResponse } from "../../services/movieService.ts";
+import type { Movie } from "../../types/movie.ts";
 import SearchBar from "../SearchBar/SearchBar.tsx";
 import Loader from "../Loader/Loader.tsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
@@ -22,6 +22,7 @@ export default function App() {
   queryKey: ["movies", query, page],
   queryFn: () => fetchMovies(query, page),
   enabled: !!query,
+  placeholderData: (prev) => prev,
 });
 
   const movies = data?.results ?? [];
